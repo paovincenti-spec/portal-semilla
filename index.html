@@ -1,185 +1,23 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Portal Semilla</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f2ef;
-      margin: 0;
-      padding: 20px;
-      color: #333;
-    }
-    .screen {
-      display: none;
-      max-width: 600px;
-      margin: auto;
-    }
-    .active {
-      display: block;
-    }
-    h1, h2 {
-      text-align: center;
-    }
-    button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 20px;
-      font-size: 16px;
-      background: #6b8e7d;
-      color: white;
-      border: none;
-      border-radius: 6px;
-    }
-    select {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      margin-top: 20px;
-    }
-    .note {
-      font-size: 14px;
-      opacity: 0.8;
-      text-align: center;
-      margin-top: 10px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rich Arcano</title>
 </head>
 <body>
-<!-- PANTALLA 1 – BIENVENIDA -->
-<div class="screen active" id="screen-welcome">
-  <h1>Portal Semilla</h1>
-  <h2>Ábrete a recibir</h2>
-  <p>
-    Un espacio consciente, energético y práctico para reconocer y liberar
-    bloqueos en el dinero.
-  </p>
-  <p>
-    No es para hacerlo perfecto.<br>
-    Es para hacerlo presente.
-  </p>
-  <button onclick="goTo('screen-prep')">Abrir el portal</button>
-</div>
-<!-- PANTALLA 2 – PREPARACIÓN -->
-<div class="screen" id="screen-prep">
-  <h2>Antes de comenzar</h2>
-  <p>
-    Elegí un momento de calma.<br>
-    Este portal se abre cuando hay disponibilidad interna.
-  </p>
-  <p class="note">
-    Música suave, cuencos, agua, piano o frecuencias 432 / 528 Hz.
-  </p>
-  <button onclick="goTo('screen-test')">
-    Realizar Test de Bloqueo Principal
-  </button>
-</div>
-<!-- PANTALLA 3 – TEST -->
-<div class="screen" id="screen-test">
-  <h2>Test inicial</h2>
-  <p>
-    Elegí un número del 1 al 23.<br>
-    No lo pienses demasiado.
-  </p>
-  <select id="numberSelect">
-    <option value="">Elegir número</option>
-    <script>
-      for (let i = 1; i <= 23; i++) {
-        document.write(`<option value="${i}">${i}</option>`);
-      }
-    <\/script>
-  </select>
-  <button onclick="reveal()">Revelar mi bloqueo</button>
-</div>
-<!-- PANTALLA 4 – RESULTADO -->
-<div class="screen" id="screen-result">
-  <h2 id="arcano-title"></h2>
-  <p id="arcano-text"></p>
-  <button onclick="goTo('screen-day1')">
-    Iniciar recorrido de 7 días
-  </button>
-</div>
-<!-- PANTALLA 5 – DÍA 1 -->
-<div class="screen" id="screen-day1">
-  <h2>Día 1 – Observación consciente</h2>
-  <p id="day1-block"></p>
-  <p><strong>Intención:</strong><br>
-    Reconocer cómo se manifiesta tu bloqueo elegido.
-  </p>
-  <p><strong>Práctica:</strong><br>
-    Observá pensamientos sobre dinero y sensaciones al recibir o cobrar.
-  </p>
-  <p><strong>Escritura:</strong></p>
-  <ul>
-    <li>¿Dónde veo hoy mi bloqueo en acción?</li>
-    <li>¿Qué situaciones lo activan?</li>
-  </ul>
-  <p><em>“Observar sin juzgar abre conciencia.”</em></p>
-  <button onclick="goTo('screen-close')">
-    Cerrar por hoy
-  </button>
-</div>
-<!-- PANTALLA FINAL -->
-<div class="screen" id="screen-close">
-  <h2>Proceso iniciado</h2>
-  <p>
-    Este portal no termina aquí.<br>
-    Lo que se ordena adentro, se acomoda afuera.
-  </p>
-  <button onclick="goTo('screen-welcome')">
-    Volver a comenzar
-  </button>
-</div>
-<script>
-  const arcanos = {
-    1: "El Mago – Duda sobre tu capacidad para materializar.",
-    2: "La Sacerdotisa – Intuición guardada, miedo a mostrarse.",
-    3: "La Emperatriz – Dar mucho sin recibir.",
-    4: "El Emperador – Control y rigidez.",
-    5: "El Hierofante – Creencias heredadas limitantes.",
-    6: "Los Enamorados – Indecisión y dispersión.",
-    7: "El Carro – Avanzar desde la exigencia.",
-    8: "La Justicia – Autoexigencia constante.",
-    9: "El Ermitaño – Aislamiento.",
-    10: "La Rueda – Inestabilidad cíclica.",
-    11: "La Fuerza – Contención del deseo.",
-    12: "El Colgado – Sacrificio como condición.",
-    13: "La Muerte – Resistencia al cierre.",
-    14: "La Templanza – Falta de dirección.",
-    15: "El Diablo – Culpa por desear más.",
-    16: "La Torre – Miedo a perder.",
-    17: "La Estrella – Confianza intermitente.",
-    18: "La Luna – Confusión.",
-    19: "El Sol – Temor a brillar.",
-    20: "El Juicio – Llamado postergado.",
-    21: "El Mundo – Límite para recibir en grande.",
-    23: "Yo Superior – Integración y liderazgo consciente."
-  };
-
-  let selectedNumber = null;
-
-  function goTo(id) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-  }
-
-  function reveal() {
-    selectedNumber = document.getElementById("numberSelect").value;
-    if (!selectedNumber) return alert("Elegí un número");
-
-    document.getElementById("arcano-title").innerText =
-      "Tu número es " + selectedNumber;
-
-    document.getElementById("arcano-text").innerText =
-      arcanos[selectedNumber];
-
-    document.getElementById("day1-block").innerText =
-      "Bloqueo activo: " + arcanos[selectedNumber];
-
-    goTo("screen-result");
-  }
-</script>
+    <h1>Rich Arcano</h1>
+    <div id="arcano-container">
+        <!-- Loop through rich arcanos 0 to 22 -->
+        {{#each arcanos}}
+        <div class="arcano">
+            <img src="images/arcano-{{this.index}}.svg" alt="Arcano {{this.index}}">
+            <h2>{{this.description}}</h2>
+            <p>7-Day Plan: {{this.plan}}</p>
+            <p>Affirmation: {{this.affirmation}}</p>
+            <textarea placeholder="Journaling..."></textarea>
+        </div>
+        {{/each}}
+    </div>
 </body>
 </html>
