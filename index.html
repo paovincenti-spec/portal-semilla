@@ -1,23 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rich Arcano</title>
+<title>Rich Arcano Data</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <h1>Rich Arcano</h1>
-    <div id="arcano-container">
-        <!-- Loop through rich arcanos 0 to 22 -->
-        {{#each arcanos}}
-        <div class="arcano">
-            <img src="images/arcano-{{this.index}}.svg" alt="Arcano {{this.index}}">
-            <h2>{{this.description}}</h2>
-            <p>7-Day Plan: {{this.plan}}</p>
-            <p>Affirmation: {{this.affirmation}}</p>
-            <textarea placeholder="Journaling..."></textarea>
-        </div>
-        {{/each}}
-    </div>
+<h1>Welcome to Rich Arcano Data</h1>
+<p>This is a sample webpage with UI and scripts.</p>
+<script src="script.js"></script>
 </body>
 </html>
